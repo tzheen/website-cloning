@@ -1,0 +1,43 @@
+@import "tailwindcss";
+.bpc-nav-pane {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s var(--ease-soft);
+    max-height: calc(100vh - var(--bpc-nav-sheet-top, 69px));
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+    inset-inline: 0;
+    position: absolute;
+    top: 0;
+    overflow-y: auto;
+}
+
+.bpc-eyebrow {
+    font-family: var(--bpc-font-sans);
+    font-weight: 600;
+    font-size: var(--text-body-sm);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    align-items: center;
+    gap: .5rem;
+    display: inline-flex;
+}
+
+.bpc-theme {
+    background: var(--bpc-color-surface-default);
+    color: var(--bpc-color-text-default);
+    font-family: var(--bpc-font-sans);
+}
+
+.bpc-nav-row-title, .bpc-nav-row-desc {
+    transition: color .3s var(--ease-soft);
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+}
