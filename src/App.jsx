@@ -8,9 +8,7 @@ function App() {
         <Navbar />
       </header>
 
-      <main>
-        <ScrollSections />
-      </main>
+      <ScrollSections />
     </>
   );
 }

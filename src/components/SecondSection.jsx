@@ -2,8 +2,6 @@ const SecondSection = ({ progress }) => {
   const text =
     "Energy demand is increasing. And Americans are feeling it.";
 
-  const backgroundProgress = Math.min(progress * 2.5, 1);
-
   const textProgress = Math.max((progress - 0.3) / 0.7, 0);
 
   const words = text.split(" ");
@@ -21,9 +19,6 @@ const SecondSection = ({ progress }) => {
   return (
     <section
       className="absolute inset-0 z-10 flex items-center justify-center"
-      style={{
-        backgroundColor: `rgba(255, 255, 255, ${backgroundProgress})`,
-      }}
     >
       <div className="relative max-w-5xl text-justify w-4xl">
         <h2 className="text-6xl font-bold text-black">
@@ -50,7 +45,6 @@ const SecondSection = ({ progress }) => {
           })}
         </h2>
 
-        {/* Underline image */}
         <div
           className="absolute left-0 top-[25%] w-full overflow-hidden"
           style={{
@@ -64,96 +58,95 @@ const SecondSection = ({ progress }) => {
           />
         </div>
 
-        {/* Chips */}
-        <ul className="mt-12 flex justify-center gap-4" role="list">
-          {/* Chip 1 */}
-          <li
-            className="flex items-center gap-2 rounded-2xl bg-white px-4 py-2"
-            style={{
-              opacity: chip1Progress,
-              filter: `blur(${(1 - chip1Progress) * 8}px)`,
-              transform: `translateY(${(1 - chip1Progress) * 30}px)`,
-            }}
-          >
-            <span className="flex h-8 w-8 items-center justify-center rounded-full ">
-              <svg
-                viewBox="0 0 31 31"
-                fill="none"
-                className="h-6 w-6"
-              >
-                <circle
-                  cx="15.5"
-                  cy="15.5"
-                  r="15.5"
-                  fill="currentColor"
-                  className="text-orange-500"
-                />
+        <div className="flex">
+          <ul className="mt-12 flex justify-center gap-4" role="list">
+            <li
+              className="relative rounded-2xl bg-white px-4 py-4"
+              style={{
+                opacity: chip1Progress,
+                filter: `blur(${(1 - chip1Progress) * 8}px)`,
+                transform: `translateY(${(1 - chip1Progress) * 30}px)`,
+              }}
+            >
+              <span className="absolute -left-3 -top-3">
+                <svg
+                  viewBox="0 0 31 31"
+                  fill="none"
+                  className="h-8 w-8"
+                >
+                  <circle
+                    cx="15.5"
+                    cy="15.5"
+                    r="15.5"
+                    fill="currentColor"
+                    className="text-red-100"
+                  />
 
-                <path
-                  d="M7.92245 22.0343L11.7428 14.9322C12.0933 14.2805 13.0056 14.2221 13.4364 14.8236L15.5896 17.8302C16.0087 18.4153 16.89 18.3795 17.2602 17.7623L22.1105 9.6762"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
+                  <path
+                    d="M7.92245 22.0343L11.7428 14.9322C12.0933 14.2805 13.0056 14.2221 13.4364 14.8236L15.5896 17.8302C16.0087 18.4153 16.89 18.3795 17.2602 17.7623L22.1105 9.6762"
+                    stroke="#9A3412"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
 
-                <path
-                  d="M23.3906 12.2383L22.9173 8.76456L19.2267 9.67599"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </span>
+                  <path
+                    d="M23.3906 12.2383L22.9173 8.76456L19.2267 9.67599"
+                    stroke="#9A3412"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>
 
-            <span className="rounded-full px-2 py-1 text-sm font-medium text-orange-900">
-              Rising energy costs
-            </span>
-          </li>
+              <span className="block px-2 py-1 text-sm font-medium text-orange-900">
+                Rising energy costs
+              </span>
+            </li>
 
-          {/* Chip 2 */}
-          <li
-            className="flex items-center gap-2 rounded-2xl bg-white px-4 py-2"
-            style={{
-              opacity: chip2Progress,
-              filter: `blur(${(1 - chip2Progress) * 8}px)`,
-              transform: `translateY(${(1 - chip2Progress) * 30}px)`,
-            }}
-          >
-            <span className="flex h-8 w-8 items-center justify-center rounded-full">
-              <svg
-                viewBox="0 0 31 31"
-                fill="none"
-                className="h-6 w-6"
-              >
-                <circle
-                  cx="15.5"
-                  cy="15.5"
-                  r="15.5"
-                  fill="currentColor"
-                  className="text-yellow-400"
-                />
+            <li
+              className="flex items-center gap-2 rounded-2xl bg-white px-4 py-2"
+              style={{
+                opacity: chip2Progress,
+                filter: `blur(${(1 - chip2Progress) * 8}px)`,
+                transform: `translateY(${(1 - chip2Progress) * 30}px)`,
+              }}
+            >
+              <span className="absolute -left-3 -top-3">
+                <svg
+                  viewBox="0 0 31 31"
+                  fill="none"
+                  className="h-8 w-8"
+                >
+                  <circle
+                    cx="15.5"
+                    cy="15.5"
+                    r="15.5"
+                    fill="  "
+                    className="fill-orange-100"
+                  />
 
-                <path
-                  d="M7.92245 22.0343L11.7428 14.9322C12.0933 14.2805 13.0056 14.2221 13.4364 14.8236L15.5896 17.8302C16.0087 18.4153 16.89 18.3795 17.2602 17.7623L22.1105 9.6762"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
+                  <path
+                    d="M7.92245 22.0343L11.7428 14.9322C12.0933 14.2805 13.0056 14.2221 13.4364 14.8236L15.5896 17.8302C16.0087 18.4153 16.89 18.3795 17.2602 17.7623L22.1105 9.6762"
+                    stroke="#9A3412"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
 
-                <path
-                  d="M23.3906 12.2383L22.9173 8.76456L19.2267 9.67599"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </span>
+                  <path
+                    d="M23.3906 12.2383L22.9173 8.76456L19.2267 9.67599"
+                    stroke="#9A3412"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>
 
-            <span className="rounded-full px-2 py-1 text-sm font-medium text-yellow-900">
-              Increased power outages
-            </span>
-          </li>
-        </ul>
+              <span className="rounded-full px-2 py-1 text-sm font-medium text-yellow-900">
+                Increased power outages
+              </span>
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
   );

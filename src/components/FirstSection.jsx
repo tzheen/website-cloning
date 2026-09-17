@@ -1,10 +1,11 @@
+import Smallcard from "./Smallcard";
+
 const FirstSection = ({ progress }) => {
   return (
     <section
       className="absolute inset-0"
       style={{
-        opacity: 1 - progress,
-        transform: `scale(${1 + progress * 0.08})`,
+        opacity: 1 - (progress * 5)
       }}
     >
       <video
@@ -15,6 +16,9 @@ const FirstSection = ({ progress }) => {
         playsInline
         src="/images/video.mp4"
       />
+      
+      <Smallcard />
+
 
       <div
         className="absolute inset-0 bg-cover bg-center"
