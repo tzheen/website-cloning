@@ -1,8 +1,31 @@
-import { useState, useRef} from "react"
+import { useState, useEffect} from "react"
 import DescriptionCard from "./DescriptionCard"
 import ContentCard from "./ContentCard";
 
 const Navbar = () => {
+    const [showNavbar, setShowNavbar] = useState(true);
+    const [lastScrollY, setLastScrollY] = useState(0);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+                console.log("currentScrollY:", currentScrollY, "lastScrollY:", lastScrollY);
+            if (currentScrollY > lastScrollY && currentScrollY > 50) {
+                setShowNavbar(false);
+            } else if (currentScrollY < lastScrollY) {
+                setShowNavbar(true);
+            }
+
+            setLastScrollY(currentScrollY);
+            };
+
+            window.addEventListener("scroll", handleScroll);
+
+            return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, [lastScrollY]);
+
     const [isProductsOpen, setIsProductsOpen] = useState(false);
     const [isPricingOpen, setIsPricingOpen] = useState(false);
     const [isResourcesOpen, setIsResourcesOpen] = useState(false);
@@ -15,8 +38,23 @@ const Navbar = () => {
             isUtilitiesOpen ||
             isCompanyOpen;
 
+    useEffect(() => {
+        if (isAnyMenuOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [isAnyMenuOpen]);
+    
+
+
   return (
-    <nav className={`left-0 right-0 z-50 antialiased duration-300 transition-[background-color] relative w-full ${isAnyMenuOpen ? "bg-white" : "bg-transparent"}`}>
+    <nav className={`left-0 right-0 z-50 antialiased duration-300 transition-[background-color] relative w-full ${isAnyMenuOpen ? "bg-white" : "bg-transparent"} transition-transform duration-500 ease-out
+        ${showNavbar ? "translate-y-0" : "-translate-y-full"}`}>
         <div className={`max-w-[1376px] mx-auto px-4 md:px-8 h-[53px] md:h-[69px] flex items-center justify-between gap-4 ${isAnyMenuOpen ? "text-black" : "text-white"}`}>
             <div className="flex items-center gap-4 lg:gap-8">
                 <div className="flex shrink-0 items-center gap-3">
@@ -28,23 +66,24 @@ const Navbar = () => {
                     <li onMouseEnter={() => setIsProductsOpen(true)} onMouseLeave={() => setIsProductsOpen(false)}>
                         <button aria-expanded={isProductsOpen} aria-controls="fullnav-panel-products"className="inline-flex items-center gap-1 rounded px-3.5 py-2 text-body-lg font-medium transition-colors duration-300 ease-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary-foreground text-text-inverse hover:bg-white/10">
                             Products
-                        <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        aria-hidden="true"
-                        className={`shrink-0 transition-transform duration-200 ${
-                            isProductsOpen ? "rotate-180" : ""
-                        }`}
-                        >
-                        <path d="m6 9 6 6 6-6" />
-                        </svg>                        </button>
+                            <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            aria-hidden="true"
+                            className={`shrink-0 transition-transform duration-200 ${
+                                isProductsOpen ? "rotate-180" : ""
+                            }`}
+                            >
+                            <path d="m6 9 6 6 6-6" />
+                            </svg>                        
+                        </button>
                     </li>
                     <li onMouseEnter={() => setIsPricingOpen(true)} onMouseLeave={() => setIsPricingOpen(false)}>
                         <button aria-expanded={isPricingOpen} aria-controls="fullnav-panel-pricing" className="inline-flex items-center gap-1 rounded px-3.5 py-2 text-body-lg font-medium transition-colors duration-300 ease-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary-foreground text-text-inverse hover:bg-white/10">
@@ -126,7 +165,7 @@ const Navbar = () => {
             </div>
         </div>
         <div data-open={isAnyMenuOpen}>
-        <div onMouseEnter={() => setIsProductsOpen(true)} onMouseLeave={() => setIsProductsOpen(false)} id="fullnav-panel-products" className={`absolute top-full left-0 right-0 z-50 bg-surface-default transition-[opacity,visibility] duration-300 ${isProductsOpen ? "opacity-100 visible" : "opacity-0 invisible"} bg-white`}>
+            <div onMouseEnter={() => setIsProductsOpen(true)} onMouseLeave={() => setIsProductsOpen(false)} id="fullnav-panel-products" className={`absolute top-full left-0 right-0 z-50 bg-surface-default transition-[opacity,visibility] duration-300 ${isProductsOpen ? "opacity-100 visible" : "opacity-0 invisible"} bg-white`}>
                 <div className="max-w-[1376px] mx-auto px-4 md:px-8 py-8 ">
                     <div className="grid grid-cols-3 gap-6">
                         <div className="min-w-0 px-8 first:pl-0 last:pr-0 flex-1 border-r border-gray-300 pl-4">
@@ -384,7 +423,7 @@ const Navbar = () => {
                         </div>
                     </div>
                 </div>
-            </div>f
+            </div>
         </div>
     </nav>
   )
