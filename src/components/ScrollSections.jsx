@@ -52,6 +52,7 @@ const ScrollSections = () => {
 
         <SecondSection
           progress={progress1}
+          progress2={progress2}
         />
 
         <ThirdSection progress={progress2} />

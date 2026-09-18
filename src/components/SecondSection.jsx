@@ -1,4 +1,4 @@
-const SecondSection = ({ progress }) => {
+const SecondSection = ({ progress, progress2 }) => {
   const text =
     "Energy demand is increasing. And Americans are feeling it.";
 
@@ -16,8 +16,21 @@ const SecondSection = ({ progress }) => {
     1
   );
 
+  // =====================================
+  // Hide Section 2 when Section 3
+  // reaches 40%
+  // =====================================
+
+  // Section 2 fades out as Section 3 reaches 30% → 40%
+  const section2Opacity = Math.min(Math.max((0.2 - progress2) / 0.1, 0), 1);
+
   return (
-    <section className="absolute inset-0 z-10 flex justify-center h-[150vh]">
+    <section
+      className="absolute inset-0 z-10 flex justify-center h-[150vh]"
+      style={{
+        opacity: section2Opacity,
+      }}
+    >
       <div className="relative max-w-5xl text-justify w-4xl top-[25%]">
         <h2 className="text-6xl font-bold text-black">
           {words.map((word, index) => {
@@ -46,7 +59,9 @@ const SecondSection = ({ progress }) => {
         <div
           className="absolute left-0 top-[4%] w-full overflow-hidden"
           style={{
-            clipPath: `inset(0 ${100 - textProgress * 100}% 0 0)`,
+            clipPath: `inset(0 ${
+              100 - textProgress * 100
+            }% 0 0)`,
           }}
         >
           <img
@@ -57,13 +72,20 @@ const SecondSection = ({ progress }) => {
         </div>
 
         <div className="flex">
-          <ul className="mt-12 flex justify-center gap-4" role="list">
+          <ul
+            className="mt-12 flex justify-center gap-4"
+            role="list"
+          >
             <li
               className="relative rounded-2xl bg-white px-4 py-4"
               style={{
                 opacity: chip1Progress,
-                filter: `blur(${(1 - chip1Progress) * 8}px)`,
-                transform: `translateY(${(1 - chip1Progress) * 30}px)`,
+                filter: `blur(${
+                  (1 - chip1Progress) * 8
+                }px)`,
+                transform: `translateY(${
+                  (1 - chip1Progress) * 30
+                }px)`,
               }}
             >
               <span className="absolute -left-3 -top-3">
@@ -105,8 +127,12 @@ const SecondSection = ({ progress }) => {
               className="flex items-center gap-2 rounded-2xl bg-white px-4 py-2"
               style={{
                 opacity: chip2Progress,
-                filter: `blur(${(1 - chip2Progress) * 8}px)`,
-                transform: `translateY(${(1 - chip2Progress) * 30}px)`,
+                filter: `blur(${
+                  (1 - chip2Progress) * 8
+                }px)`,
+                transform: `translateY(${
+                  (1 - chip2Progress) * 30
+                }px)`,
               }}
             >
               <span className="absolute -left-3 -top-3">
@@ -119,7 +145,6 @@ const SecondSection = ({ progress }) => {
                     cx="15.5"
                     cy="15.5"
                     r="15.5"
-                    fill="  "
                     className="fill-orange-100"
                   />
 
