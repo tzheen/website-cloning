@@ -1,13 +1,42 @@
 import Smallcard from "./Smallcard";
 
 const FirstSection = ({ progress }) => {
+  // =====================================
+  // Section opacity
+  // =====================================
+
+  const sectionOpacity = Math.max(
+    1 - progress * 5,
+    0
+  );
+
+  // =====================================
+  // Blur
+  // =====================================
+
+  const blur = progress * 50;
+
+  // =====================================
+  // Background blur image
+  // =====================================
+
+  const blurImageOpacity = Math.min(
+    progress * 3,
+    1
+  );
+
   return (
     <section
-      className="absolute inset-0 h-screen"
+      className="absolute inset-0 z-10 h-screen overflow-hidden"
       style={{
-        opacity: 1 - (progress * 5)
+        opacity: sectionOpacity,
       }}
     >
+
+      {/* =====================================
+          VIDEO
+      ===================================== */}
+
       <video
         className="absolute inset-0 h-full w-full object-cover"
         autoPlay
@@ -16,28 +45,49 @@ const FirstSection = ({ progress }) => {
         playsInline
         src="/images/video.mp4"
       />
-      
+
+      {/* =====================================
+          SMALL CARD
+      ===================================== */}
+
       <Smallcard />
 
+      {/* =====================================
+          BLURRED IMAGE
+      ===================================== */}
 
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: "url('/images/hero-video-blur.avif')",
-          opacity: Math.min(progress * 3, 1),
+          backgroundImage:
+            "url('/images/hero-video-blur.avif')",
+          opacity: blurImageOpacity,
         }}
       />
+
+      {/* =====================================
+          BLUR OVERLAY
+      ===================================== */}
 
       <div
         className="absolute inset-0"
         style={{
-          backdropFilter: `blur(${progress * 50}px)`,
+          backdropFilter: `blur(${blur}px)`,
         }}
       />
 
+      {/* =====================================
+          TOP GRADIENT
+      ===================================== */}
+
       <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/10 via-10% to-transparent" />
 
+      {/* =====================================
+          LEFT GRADIENT
+      ===================================== */}
+
       <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 via-30% to-transparent" />
+
     </section>
   );
 };
