@@ -28,42 +28,34 @@ const ScrollSections = () => {
   // 0vh → 100vh
   // =====================================
 
-  const progress1 = Math.min(
-    Math.max(scrollY / screenHeight, 0),
-    1
-  );
+  const progress1 = Math.min(Math.max(scrollY / screenHeight, 0), 1);
 
   // =====================================
   // Second → Third
   // 100vh → 200vh
   // =====================================
 
-  const progress2 = Math.min(
-    Math.max(
-      (scrollY - screenHeight) / screenHeight,
-      0
-    ),
-    1
-  );
+  const progress2 = Math.min(Math.max((scrollY - screenHeight) / screenHeight, 0), 1);
 
   // =====================================
-  // Third → Fourth
+  // Third → Outofviewport
   // 200vh → 300vh
   // =====================================
 
-  const progress3 = Math.min(
-    Math.max(
-      (scrollY - screenHeight * 2) / screenHeight,
-      0
-    ),
-    1
-  );
+  const progress3 = Math.min(Math.max((scrollY - screenHeight * 2) / screenHeight, 0), 1);
+
+  // =====================================
+  // Second → Third
+  // 300vh → 400vh
+  // =====================================
+
+  const progress4 = Math.min(Math.max((scrollY - screenHeight * 3) / screenHeight, 0), 1);
 
   return (
         <main
           className="
             relative
-            h-[400vh]
+            h-[500vh]
             bg-[#f0eeeb]
             bg-[radial-gradient(#6b728020_1px,transparent_1px)]
             bg-[length:13px_13px]
@@ -82,7 +74,7 @@ const ScrollSections = () => {
         ===================================== */}
 
         <FirstSection
-          progress={progress1}
+          progress1={progress1}
         />
 
         {/* =====================================
@@ -90,7 +82,7 @@ const ScrollSections = () => {
         ===================================== */}
 
         <SecondSection
-          progress={progress1}
+          progress1={progress1}
           progress2={progress2}
         />
 
@@ -99,8 +91,8 @@ const ScrollSections = () => {
         ===================================== */}
 
         <ThirdSection
-          progress={progress2}
-          progress2={progress3}
+          progress2={progress2}
+          progress3={progress3}
         />
 
         {/* =====================================
@@ -108,7 +100,8 @@ const ScrollSections = () => {
         ===================================== */}
 
         <FourthSection
-          progress={progress3}
+          progress3={progress3}
+          progress4={progress4}
         />
 
       </div>

@@ -1,4 +1,4 @@
-const SecondSection = ({progress, progress2}) => {
+const SecondSection = ({progress1, progress2}) => {
 
   const text =
     "Energy demand is increasing. And Americans are feeling it.";
@@ -8,7 +8,7 @@ const SecondSection = ({progress, progress2}) => {
   // =====================================
 
   const textProgress = Math.max(
-    (progress - 0.3) / 0.3,
+    (progress1 - 0.3) / 0.3,
     0
   );
 

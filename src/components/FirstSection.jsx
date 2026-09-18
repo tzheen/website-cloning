@@ -1,12 +1,12 @@
 import Smallcard from "./Smallcard";
 
-const FirstSection = ({ progress }) => {
+const FirstSection = ({ progress1 }) => {
   // =====================================
   // Section opacity
   // =====================================
 
   const sectionOpacity = Math.max(
-    1 - progress * 5,
+    1 - progress1 * 5,
     0
   );
 
@@ -14,14 +14,14 @@ const FirstSection = ({ progress }) => {
   // Blur
   // =====================================
 
-  const blur = progress * 50;
+  const blur = progress1 * 50;
 
   // =====================================
   // Background blur image
   // =====================================
 
   const blurImageOpacity = Math.min(
-    progress * 3,
+    progress1 * 3,
     1
   );
 

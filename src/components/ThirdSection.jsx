@@ -1,8 +1,8 @@
-const ThirdSection = ({ progress, progress2 }) => {
+const ThirdSection = ({ progress2, progress3 }) => {
     const rows = 3;
     const cols = 5;
 
-    const section3Y = -progress2 * 100;
+    const section3Y = -progress3 * 100;
 
     const pieces = Array.from({
         length: rows * cols,
@@ -32,14 +32,14 @@ const ThirdSection = ({ progress, progress2 }) => {
 
     const revealEnd = 0.6;
 
-    const revealProgress = Math.min(progress / revealEnd, 1);
+    const revealProgress = Math.min(progress2 / revealEnd, 1);
 
     // =====================================
     // Phase 2
     // Pieces combine: 60 → 100%
     // =====================================
 
-    const combineProgress = Math.min(Math.max((progress - revealEnd) / (1 - revealEnd), 0), 1);
+    const combineProgress = Math.min(Math.max((progress2 - revealEnd) / (1 - revealEnd), 0), 1);
 
     // =====================================
     // Grid size
@@ -64,7 +64,7 @@ const ThirdSection = ({ progress, progress2 }) => {
 
     const bgProgress = Math.min(Math.max((combineProgress - bgStart) / (1 - bgStart), 0), 1);
 
-    const shadowProgress = Math.min(Math.max((progress - 0.85) / 0.15, 0), 1);
+    const shadowProgress = Math.min(Math.max((progress2 - 0.85) / 0.15, 0), 1);
 
     const shadowY = 100 * (1 - shadowProgress);
 
