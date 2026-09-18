@@ -3,7 +3,7 @@ import Smallcard from "./Smallcard";
 const FirstSection = ({ progress }) => {
   return (
     <section
-      className="absolute inset-0"
+      className="absolute inset-0 h-screen"
       style={{
         opacity: 1 - (progress * 5)
       }}

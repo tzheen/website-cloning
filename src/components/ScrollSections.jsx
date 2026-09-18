@@ -37,7 +37,7 @@ const ScrollSections = () => {
   );
 
   return (
-    <main className="relative h-[300vh]">
+    <main className="relative h-[400vh]">
 
       <div className="sticky top-0 h-screen overflow-hidden">
 
