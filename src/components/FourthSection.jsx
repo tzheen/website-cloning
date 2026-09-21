@@ -23,77 +23,71 @@ const FourthSection = ({ progress3, progress4 }) => {
         transform: `translateY(${translateY}%)`,
       }}
     >
-      <div className="relative w-7xl text-justify">
+        <div className="relative w-7xl">
 
-        {/* =====================================
-            MAIN TEXT
-        ===================================== */}
+          <span className="text-5xl font-bold text-[#292826] duration-300 transition leading-[1.37] text-[46px]">
+            <span className="text-[#1e4d2b]">A Texas-sized home battery&nbsp;</span>
+            {words.map((word, index) => {
 
-        <span className="text-5xl font-bold text-[#1e4d2b]">
-          A Texas-sized home battery
-        </span>
-        <span className="text-5xl font-bold text-[#292826] duration-300 transition">
-          {words.map((word, index) => {
+              const wordProgress = Math.min(
+                Math.max(
+                  textProgress * words.length - index,
+                  0
+                ),
+                1
+              );
 
-            const wordProgress = Math.min(
-              Math.max(
-                textProgress * words.length - index,
-                0
-              ),
-              1
-            );
+              return (
+                <span
+                  key={index}
+                  className="inline-block transition-all duration-300"
+                  style={{
+                    opacity: wordProgress,
+                    filter: `blur(${
+                      (1 - wordProgress) * 10
+                    }px)`,
+                    transform: `translateY(${
+                      (1 - wordProgress) * 30
+                    }px)`,
+                  }}
+                >
+                  {word}
 
-            return (
-              <span
-                key={index}
-                className="inline-block transition-all duration-300"
-                style={{
-                  opacity: wordProgress,
-                  filter: `blur(${
-                    (1 - wordProgress) * 10
-                  }px)`,
-                  transform: `translateY(${
-                    (1 - wordProgress) * 30
-                  }px)`,
-                }}
-              >
-                {word}
+                  {index < words.length - 1 &&
+                    "\u00A0"}
+                </span>
+              );
+            })}
 
-                {index < words.length - 1 &&
-                  "\u00A0"}
-              </span>
-            );
-          })}
+          </span>
 
-        </span>
+          <div
+            className="relative py-4 flex flex-col mt-14 gap-7.5"
+            style={{
+              opacity: container1Progress,
+              transform: `translateY(${(1 - container1Progress) * 20}px)`,
+            }}
+          >
+            <span className="text-[#292826] font-semibold text-[28px]">Base designs, builds, installs, and maintains each Base Core Battery.</span>
 
-        <div
-          className="relative px-4 py-4"
-          style={{
-            opacity: container1Progress,
-            transform: `translateY(${(1 - container1Progress) * 20}px)`,
-          }}
-        >
-          Base designs, builds, installs, and maintains each Base Core Battery.
+            <span className="text-[#7f7d7a] font-medium text-[16px]">Currently available in Texas and Illinois.</span>
 
-          Currently available in Texas and Illinois.
+          </div>
+
+          <div
+            className="relative py-4 mt-14"
+            style={{
+              opacity: container2Progress,
+              transform: `translateY(${(1 - container2Progress) * 20}px)`,
+            }}
+          >
+            <a>See your pricing</a>
+
+          </div>
+
+
 
         </div>
-
-                <div
-          className="relative px-4 py-4"
-          style={{
-            opacity: container2Progress,
-            transform: `translateY(${(1 - container2Progress) * 20}px)`,
-          }}
-        >
-testing
-
-        </div>
-
-
-
-      </div>
     </section>
   );
 };
