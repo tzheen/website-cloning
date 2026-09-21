@@ -9,7 +9,7 @@ const FourthSection = ({ progress3, progress4, progress5}) => {
       hasAutoScrolled.current = true;
 
       window.scrollTo({
-        top: window.innerHeight * 5,
+        top: window.innerHeight * 5.2,
         behavior: "smooth",
       });
     }
@@ -42,7 +42,7 @@ const FourthSection = ({ progress3, progress4, progress5}) => {
     >
         <div className="relative w-7xl">
 
-          <span className="text-5xl font-bold text-[#292826] duration-300 transition leading-[1.37] text-[46px]">
+          <h2 className="text-5xl font-bold text-[#292826] duration-300 transition leading-[1.37] text-[46px]">
             <span className="text-[#1e4d2b]">A Texas-sized home battery&nbsp;</span>
             {words.map((word, index) => {
 
@@ -76,7 +76,7 @@ const FourthSection = ({ progress3, progress4, progress5}) => {
               );
             })}
 
-          </span>
+          </h2>
 
           <div
             className="relative py-4 flex flex-col mt-14 gap-7.5"

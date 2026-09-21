@@ -43,7 +43,7 @@ const ScrollSections = () => {
   // 200vh → 300vh
   // =====================================
 
-  const progress3 = Math.min(Math.max((scrollY - screenHeight * 2) / screenHeight, 0), 1);
+  const progress2to4 = Math.min(Math.max((scrollY - screenHeight * 2) / screenHeight, 0), 1);
 
   // =====================================
   // Third → Fourth
@@ -57,13 +57,20 @@ const ScrollSections = () => {
   // 400vh → 500vh
   // =====================================
 
-  const progress5 = Math.min(Math.max((scrollY - screenHeight * 4) / screenHeight, 0), 1);
+  const progress4to6 = Math.min(Math.max((scrollY - screenHeight * 4) / screenHeight, 0), 1);
+
+  // =====================================
+  // Component Progress
+  // 500vh → 600vh
+  // =====================================
+
+  const progress6 = Math.min(Math.max((scrollY - screenHeight * 5) / screenHeight, 0), 1);
 
   return (
         <main
           className="
             relative
-            h-[600vh]
+            h-[700vh]
             bg-[#f0eeeb]
             bg-[radial-gradient(#6b728020_1px,transparent_1px)]
             bg-[length:13px_13px]
@@ -100,7 +107,7 @@ const ScrollSections = () => {
 
         <ThirdSection
           progress2={progress2}
-          progress3={progress3}
+          progress3={progress2to4}
         />
 
         {/* =====================================
@@ -108,9 +115,9 @@ const ScrollSections = () => {
         ===================================== */}
 
         <FourthSection
-          progress3={progress3}
+          progress3={progress2to4}
           progress4={progress4}
-          progress5={progress5}
+          progress5={progress4to6}
         />
 
         {/* =====================================
@@ -118,7 +125,9 @@ const ScrollSections = () => {
         ===================================== */}
 
         <FifthSection 
-          progress5={progress5}
+          progress4={progress4}
+          progress5={progress4to6}
+          progress6={progress6}
         />
 
       </div>
