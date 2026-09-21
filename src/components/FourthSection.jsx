@@ -1,5 +1,22 @@
-const FourthSection = ({ progress3, progress4 }) => {
-  const translateY = 100 - progress3 * 100;
+
+import { useEffect, useRef } from "react";
+const FourthSection = ({ progress3, progress4, progress5}) => {
+  const translateY = progress5 <= 0 ? 100 - progress3 * 100 : -progress5 * 100;
+  const hasAutoScrolled = useRef(false);
+
+  useEffect(() => {
+    if (progress5 > 0.1 && !hasAutoScrolled.current) {
+      hasAutoScrolled.current = true;
+
+      window.scrollTo({
+        top: window.innerHeight * 5,
+        behavior: "smooth",
+      });
+    }
+    if (progress5 <= 0) {
+      hasAutoScrolled.current = false;
+    }
+  }, [progress5]);
 
   const text = "that automatically powers your home when the lights go out, and saves you money, all while strengthening our grid.";
 
@@ -75,14 +92,14 @@ const FourthSection = ({ progress3, progress4 }) => {
           </div>
 
           <div
-            className="relative py-4 mt-14"
+            className="relative py-4 mt-14 flex flex-row gap-5 items-center"
             style={{
               opacity: container2Progress,
               transform: `translateY(${(1 - container2Progress) * 20}px)`,
             }}
           >
-            <a>See your pricing</a>
-
+            <a className="bg-[#B2DD79] hover:bg-[#D6F0B4] rounded-lg text-[#1E4D2B] text-[16px] font-semibold px-4 py-3 cursor-pointer">See your pricing</a>
+            <a className="text-[#54524F] hover:underline cursor-pointer">Not in your area?  Tell us where to go next ›</a>
           </div>
 
 
