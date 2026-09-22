@@ -4,6 +4,8 @@ import SecondSection from "./SecondSection";
 import ThirdSection from "./ThirdSection";
 import FourthSection from "./FourthSection";
 import FifthSection from "./FifthSection";
+import SixthSection from "./SixthSection";
+import SeventhSection from "./SeventhSection";
 
 const ScrollSections = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -66,11 +68,46 @@ const ScrollSections = () => {
 
   const progress6 = Math.min(Math.max((scrollY - screenHeight * 5) / screenHeight, 0), 1);
 
+  // =====================================
+  // Outofviewport
+  // 600vh → 700vh
+  // =====================================
+
+  const progress6to8 = Math.min(Math.max((scrollY - screenHeight * 6) / screenHeight, 0), 1);
+
+  // =====================================
+  // Fifth -> Sixth
+  // 700vh → 800vh
+  // =====================================
+
+  const progress8 = Math.min(Math.max((scrollY - screenHeight * 7) / screenHeight, 0), 1);
+
+  // =====================================
+  // Outofviewport
+  // 800vh → 900vh
+  // =====================================
+
+  const progress8to10 = Math.min(Math.max((scrollY - screenHeight * 8) / screenHeight, 0), 1);
+
+  // =====================================
+  // Sixth -> Seventh
+  // 900vh → 1000vh
+  // =====================================
+
+  const progress10 = Math.min(Math.max((scrollY - screenHeight * 9) / screenHeight, 0), 1);
+
+  // =====================================
+  // Outofviewport
+  // 900vh → 1000vh
+  // =====================================
+
+  const progress11 = Math.min(Math.max((scrollY - screenHeight * 10) / screenHeight, 0), 1);
+
   return (
         <main
           className="
             relative
-            h-[700vh]
+            h-[1000vh]
             bg-[#f0eeeb]
             bg-[radial-gradient(#6b728020_1px,transparent_1px)]
             bg-[length:13px_13px]
@@ -128,6 +165,27 @@ const ScrollSections = () => {
           progress4={progress4}
           progress5={progress4to6}
           progress6={progress6}
+          progress7={progress6to8}
+        />
+
+        {/* =====================================
+            SECTION 6
+        ===================================== */}
+
+        <SixthSection
+          progress7={progress6to8}
+          progress8={progress8}
+          progress9={progress8to10}
+        />
+
+        {/* =====================================
+            SECTION 7
+        ===================================== */}
+
+        <SeventhSection
+          progress9={progress8to10}
+          progress10={progress10}
+          progress11={progress11}
         />
 
       </div>

@@ -1,11 +1,12 @@
 import { useRef, useEffect } from "react";
 import ProgressLine from "./ProgressLine";
 
-const FifthSection = ({ progress4, progress5, progress6 }) => {
-  const translateY = 100 - progress5 * 100;
+const FifthSection = ({ progress4, progress5, progress6, progress7 }) => {
+  const translateY = progress7 <= 0 ? 100 - progress5 * 100 : -progress7 * 100;
 
   const hasAutoScrolledBack = useRef(false);
   const previousProgress5 = useRef(progress5);
+  const previousProgress7 = useRef(progress7);
 
   const images = [
     "/images/better-battery-960.avif",
@@ -23,6 +24,18 @@ const FifthSection = ({ progress4, progress5, progress6 }) => {
       Math.max(progress6, 0),
       1
   );
+
+  useEffect(() => {
+    const scrollingDown = progress7 > previousProgress7.current;
+    if (progress7 > 0.8 && scrollingDown) {
+      window.scrollTo({
+        top: window.innerHeight * 7,
+        behavior: "smooth",
+      });
+    }
+
+    previousProgress7.current = progress7;
+  }, [progress7]);
 
   useEffect(() => {
     const scrollingUp = progress5 < previousProgress5.current;
@@ -74,8 +87,7 @@ const FifthSection = ({ progress4, progress5, progress6 }) => {
           
         </div>
 
-        <div className="relative w-1/2 overflow-hidden rounded-2xl bg-amber-50">
-            {/* Current image */}
+        <div className="relative w-1/2 overflow-hidden rounded-2xl">
             <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-2000"
                 style={{
