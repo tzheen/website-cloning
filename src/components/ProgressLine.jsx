@@ -1,4 +1,8 @@
+import { useEffect, useState } from "react";
+
 const ProgressLine = ({ progress }) => {
+    const [activeIndex, setActiveIndex] = useState(0);
+
     const features = [
         {
             title: "One of the largest home batteries",
@@ -39,17 +43,50 @@ const ProgressLine = ({ progress }) => {
         },
     ];
 
-    // Determine which feature is currently active
-    const activeIndex = Math.min(
-        Math.floor(progress / 0.25),
-        features.length - 1
-    );
+    useEffect(() => {
+        const newIndex = Math.min(
+            Math.floor(progress / 0.25),
+            features.length - 1
+        );
+
+        setActiveIndex(newIndex);
+    }, [progress]);
 
     return (
         <ol className="relative mt-4.5 h-100">
-            {features.map((feature, index) => {
 
-                // Is this the currently active title?
+            {/* CONTINUOUS LINE */}
+            <span
+                className="
+                    absolute
+                    -left-5
+                    top-0
+                    h-full
+                    w-1.5
+                    rounded-2xl
+                    bg-gray-300
+                "
+            >
+                <span
+                    className="
+                        absolute
+                        left-0
+                        top-0
+                        w-full
+                        rounded-2xl
+                        bg-[#ED6C30]
+                        transition-[height]
+                        duration-300
+                        ease-out
+                    "
+                    style={{
+                        height: `${(activeIndex + 1) * 25}%`,
+                    }}
+                />
+            </span>
+
+            {/* FEATURES */}
+            {features.map((feature, index) => {
                 const isActive = index === activeIndex;
 
                 return (
@@ -61,41 +98,11 @@ const ProgressLine = ({ progress }) => {
                             gap-5
                             transition-all
                             duration-500
-                            ${
-                                isActive
-                                    ? "pb-8"
-                                    : "pb-2"
-                            }
+                            ${isActive ? "pb-10" : "pb-0"}
                         `}
                     >
-                        {/* Connecting line */}
-                        {index < features.length && (
-                            <span
-                                className={`
-                                    absolute
-                                    -left-5
-                                    top-0
-                                    w-1.5
-                                    h-full
-                                    transition-all
-                                    duration-300
-                                    ${
-                                        progress >= index * 0.25
-                                            ? "bg-[#ED6C30]"
-                                            : "bg-gray-300"
-                                    }
-                                    ${
-                                        index === 0 ? "rounded-t-2xl" : ""
-                                    }
-                                    ${
-                                        index === features.length -1 ? "rounded-b-2xl" : ""
-                                    }
-                                `}
-                            />
-                        )}
-
-                        {/* Text */}
                         <div className="pt-1">
+
                             <h3
                                 className={`
                                     font-bold
@@ -104,8 +111,8 @@ const ProgressLine = ({ progress }) => {
                                     duration-500
                                     ${
                                         isActive
-                                            ? "text-[#1E4D2B] text-[20px]"
-                                            : "text-[#54524F] text-[16px]"
+                                            ? "text-[20px] text-[#1E4D2B]"
+                                            : "text-[16px] text-[#54524F]"
                                     }
                                 `}
                             >
@@ -122,13 +129,14 @@ const ProgressLine = ({ progress }) => {
                                     duration-500
                                     ${
                                         isActive
-                                            ? "opacity-100 translate-y-0"
-                                            : "opacity-0 translate-y-4"
+                                            ? "translate-y-0 opacity-100"
+                                            : "translate-y-4 opacity-0"
                                     }
                                 `}
                             >
                                 {feature.body}
                             </p>
+
                         </div>
                     </li>
                 );
@@ -138,4 +146,3 @@ const ProgressLine = ({ progress }) => {
 };
 
 export default ProgressLine;
-
