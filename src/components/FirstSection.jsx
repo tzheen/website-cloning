@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Smallcard from "./Smallcard";
+import VideoCard from "./VideoCard";
 
 const FirstSection = ({ progress1}) => {
   const [isSmall, setIsSmall] = useState(false);
@@ -80,7 +81,7 @@ const sectionOpacity = Math.max(1 - progress1 * 1.3, 0);
       ===================================== */}
 
       <div
-        className="absolute inset-0 bg-cover bg-center"
+        className="absolute inset-0 bg-cover bg-center pointer-events-none"
         style={{
           backgroundImage:
             "url('/images/hero-video-blur.avif')",
@@ -93,30 +94,24 @@ const sectionOpacity = Math.max(1 - progress1 * 1.3, 0);
       ===================================== */}
 
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 pointer-events-none"
         style={{
           backdropFilter: `blur(${blur}px)`,
         }}
       />
+      <VideoCard />
 
       {/* =====================================
           TOP GRADIENT
       ===================================== */}
 
-      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/10 via-10% to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/10 via-10% to-transparent pointer-events-none" />
 
       {/* =====================================
           LEFT GRADIENT
       ===================================== */}
 
-      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 via-30% to-transparent" />
-
-      <div className="absolute ">
-        <a className="text-white">
-          testing
-        </a>
-
-      </div>
+      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 via-30% to-transparent pointer-events-none" />
 
     </section>
   );

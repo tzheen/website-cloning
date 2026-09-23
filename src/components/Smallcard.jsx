@@ -91,7 +91,19 @@ const Smallcard = ({ progress, smallText, isSmall }) => {
           Built for all season
         </p>
       </h1>
-      <a onClick={scrollDown} className={`transition-transform duration-500 ease-in-out flex group absolute items-center justify-center w-[226px] bg-[#B2DD79] hover:bg-[#D6F0B4] rounded-lg text-[#1E4D2B] text-[16px] font-semibold px-4 py-3 cursor-pointer ${isSmall ? "translate-y-18" : "translate-y-24"}`}>
+      <a
+        onClick={scrollDown}
+        className={`absolute z-50 pointer-events-auto flex items-center justify-center
+          w-[226px]
+          bg-[#B2DD79] hover:bg-[#D6F0B4]
+          rounded-lg
+          text-[#1E4D2B] text-[16px] font-semibold
+          px-4 py-3
+          cursor-pointer
+          transition-transform duration-500 ease-in-out
+          ${isSmall ? "translate-y-18" : "translate-y-24"}
+        `}
+      >        
         <span className="shrink-0">Learn More</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
