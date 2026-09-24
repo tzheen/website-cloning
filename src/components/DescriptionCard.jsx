@@ -15,7 +15,7 @@ function DescriptionCard({ title, description, href, image }) {
       )}
 
       <span className="min-w-0 py-0.5">
-        <span className="flex items-center text-lg font-medium text-gray-900">
+        <span className="flex items-center lg:text-lg font-medium text-gray-900 sm:text-[16px]">
           {title}
 
           <svg
