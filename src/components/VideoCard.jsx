@@ -2,7 +2,6 @@ import { useRef, useState, useEffect } from "react";
 
 const VideoCard = () => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const EDGE_GAP = 60;
 
   const videoRef = useRef(null);
   const cardRef = useRef(null);
@@ -22,6 +21,8 @@ const VideoCard = () => {
     x: 0,
     y: 0,
   });
+
+  const EDGE_GAP = 40;
 
   // =====================================
   // UPDATE POSITION
@@ -70,7 +71,7 @@ const VideoCard = () => {
     };
 
     // =====================================
-    // END DRAG
+    // RELEASE + SNAP
     // =====================================
 
     const handleMouseUp = () => {
@@ -82,80 +83,149 @@ const VideoCard = () => {
 
       if (!card) return;
 
-      const cardWidth = card.offsetWidth;
-      const cardHeight = card.offsetHeight;
-
       const screenWidth = window.innerWidth;
       const screenHeight = window.innerHeight;
 
-      const currentX = positionRef.current.x;
-      const currentY = positionRef.current.y;
+      const width = card.offsetWidth;
+      const height = card.offsetHeight;
 
       // =====================================
-      // FIND CURRENT SCREEN POSITION
+      // SCALE
       // =====================================
+
+      const scale = isPlaying ? 1.5 : 1;
+
+      const visualWidth = width * scale;
+      const visualHeight = height * scale;
+
+      // Extra size caused by scale
+      const extraWidth =
+        (visualWidth - width) / 2;
+
+      const extraHeight =
+        (visualHeight - height) / 2;
+
+      // =====================================
+      // CURRENT CENTER
+      // =====================================
+
+      // Base position is bottom/right
+      const baseLeft =
+        screenWidth - 40 - width;
+
+      const baseTop =
+        screenHeight - 40 - height;
 
       const currentLeft =
-        screenWidth -
-        40 -
-        cardWidth +
-        currentX;
+        baseLeft + positionRef.current.x;
 
       const currentTop =
-        screenHeight -
-        40 -
-        cardHeight +
-        currentY;
+        baseTop + positionRef.current.y;
 
-      const currentRight =
-        currentLeft + cardWidth;
+      const currentCenterX =
+        currentLeft + width / 2;
 
-      const currentBottom =
-        currentTop + cardHeight;
+      const currentCenterY =
+        currentTop + height / 2;
 
       // =====================================
-      // DISTANCE TO EACH SIDE
+      // DETERMINE LEFT / RIGHT
       // =====================================
 
-      const distanceLeft = currentLeft;
-      const distanceRight =
-        screenWidth - currentRight;
+      const goLeft =
+        currentCenterX < screenWidth / 2;
 
-      const distanceTop = currentTop;
-      const distanceBottom =
-        screenHeight - currentBottom;
-
-      const snapX =
-        distanceLeft < distanceRight
-          ? -(screenWidth - EDGE_GAP * 2 - cardWidth)
-          : 0;
-
-      const snapY =
-        distanceTop < distanceBottom
-          ? -(screenHeight - EDGE_GAP * 2 - cardHeight)
-          : 0;
+      const goTop =
+        currentCenterY < screenHeight / 2;
 
       // =====================================
-      // APPLY SNAP
+      // TARGET CENTER
       // =====================================
+
+      let targetCenterX;
+      let targetCenterY;
+
+      // LEFT
+      if (goLeft) {
+        targetCenterX =
+          EDGE_GAP +
+          extraWidth +
+          width / 2;
+      }
+
+      // RIGHT
+      else {
+        targetCenterX =
+          screenWidth -
+          EDGE_GAP -
+          extraWidth -
+          width / 2;
+      }
+
+      // TOP
+      if (goTop) {
+        targetCenterY =
+          EDGE_GAP +
+          extraHeight +
+          height / 2;
+      }
+
+      // BOTTOM
+      else {
+        targetCenterY =
+          screenHeight -
+          EDGE_GAP -
+          extraHeight -
+          height / 2;
+      }
+
+      // =====================================
+      // CONVERT CENTER BACK TO TRANSLATE
+      // =====================================
+
+      const targetLeft =
+        targetCenterX - width / 2;
+
+      const targetTop =
+        targetCenterY - height / 2;
+
+      const targetX =
+        targetLeft - baseLeft;
+
+      const targetY =
+        targetTop - baseTop;
 
       updatePosition({
-        x: snapX,
-        y: snapY,
+        x: targetX,
+        y: targetY,
       });
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseup", handleMouseUp);
+    window.addEventListener(
+      "mousemove",
+      handleMouseMove
+    );
+
+    window.addEventListener(
+      "mouseup",
+      handleMouseUp
+    );
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener(
+        "mousemove",
+        handleMouseMove
+      );
+
+      window.removeEventListener(
+        "mouseup",
+        handleMouseUp
+      );
     };
-  }, []);
+  }, [isPlaying]);
 
   // =====================================
-  // PLAY VIDEO
+  // PLAY
   // =====================================
 
   const playVideo = (e) => {
@@ -166,7 +236,7 @@ const VideoCard = () => {
   };
 
   // =====================================
-  // PAUSE VIDEO
+  // PAUSE
   // =====================================
 
   const pauseVideo = (e) => {
@@ -177,7 +247,7 @@ const VideoCard = () => {
   };
 
   // =====================================
-  // CLOSE VIDEO
+  // CLOSE
   // =====================================
 
   const closeVideo = (e) => {
@@ -198,8 +268,8 @@ const VideoCard = () => {
       className="
         group
         absolute
-        bottom-[60px]
-        right-[60px]
+        bottom-10
+        right-10
         z-[9999]
         w-[15.78vw]
         max-w-[350px]
@@ -215,11 +285,12 @@ const VideoCard = () => {
       style={{
         transform: `
           translate(
-            ${position.x + (isPlaying ? -50 : 0)}px,
-            ${position.y + (isPlaying ? -30 : 0)}px
+            ${position.x}px,
+            ${position.y}px
           )
           scale(${isPlaying ? 1.5 : 1})
         `,
+        transformOrigin: "center center",
       }}
     >
       {/* IMAGE */}
