@@ -1,8 +1,5 @@
 const SecondSection = ({progress1, progress2}) => {
 
-  const text =
-    "Energy demand is increasing. And Americans are feeling it.";
-
   // =====================================
   // TEXT ANIMATION
   // =====================================
@@ -12,7 +9,13 @@ const SecondSection = ({progress1, progress2}) => {
     0
   );
 
-  const words = text.split(" ");
+  const firstSentence = "Energy demand is increasing.";
+  const secondSentence = "And Americans are feeling it.";
+
+  const firstWords = firstSentence.split(" ");
+  const secondWords = secondSentence.split(" ");
+
+  const totalWords = firstWords.length + secondWords.length;
 
   // =====================================
   // CHIPS
@@ -50,8 +53,8 @@ const SecondSection = ({progress1, progress2}) => {
   );
 
   return (
-    <section
-      className="absolute inset-0 z-20 flex h-screen items-center justify-center overflow-hidden"
+    <section id="section2"
+      className="absolute inset-0 z-20 flex h-screen items-center justify-center overflow-hidden px-[24px]"
       style={{
         opacity: section2Opacity,
       }}
@@ -61,66 +64,123 @@ const SecondSection = ({progress1, progress2}) => {
           CONTENT
       ===================================== */}
 
-      <div className="relative w-4xl max-w-5xl text-justify">
+      <div className="relative w-[90%] max-w-5xl text-justify items-center">
 
         {/* =====================================
             MAIN TEXT
         ===================================== */}
+        <h2 className="sm:text-[68px] text-[40px] font-bold text-black leading-tight min-w-[500px]">
 
-        <h2 className="text-6xl font-bold text-black">
+          {/* FIRST SENTENCE */}
+          <span className="relative inline">
 
-          {words.map((word, index) => {
+            {firstWords.map((word, index) => {
+              const wordProgress = Math.min(
+                Math.max(textProgress * totalWords - index, 0),
+                1
+              );
 
-            const wordProgress = Math.min(
-              Math.max(
-                textProgress * words.length - index,
-                0
-              ),
-              1
-            );
+              return (
+                <span
+                  key={index}
+                  className="inline-block transition-all duration-300"
+                  style={{
+                    opacity: wordProgress,
+                    filter: `blur(${(1 - wordProgress) * 10}px)`,
+                    transform: `translateY(${(1 - wordProgress) * 30}px)`,
+                  }}
+                >
+                  {word}
+                  {index < firstWords.length - 1 && "\u00A0"}
+                </span>
+              );
+            })}
 
-            return (
-              <span
-                key={index}
-                className="inline-block transition-all duration-300"
+            {/* DESKTOP UNDERLINE */}
+            <span
+              className="
+                sm:block
+                absolute
+                left-0
+                right-0
+                top-[90%]
+                sm:h-[10px]
+                h-[10px]
+                overflow-hidden
+                pointer-events-none
+              "
+            >
+              <img
+                src="/images/underline-brush.avif"
+                alt=""
+                className="w-full h-full object-fill"
                 style={{
-                  opacity: wordProgress,
-                  filter: `blur(${
-                    (1 - wordProgress) * 10
-                  }px)`,
-                  transform: `translateY(${
-                    (1 - wordProgress) * 30
-                  }px)`,
+                  clipPath: `inset(0 ${
+                    150 - textProgress * 100
+                  }% 0 0)`,
                 }}
-              >
-                {word}
+              />
+            </span>
+            <span
+              className="
+                lg:hidden
+                block
+                absolute
+                left-0
+                right-0
+                top-[45%]
+                h-[10px]
+                w-[160%]
+                overflow-hidden
+                pointer-events-none
+              "
+            >
+              <img
+                src="/images/underline-brush.avif"
+                alt=""
+                className="w-full h-full object-fill"
+                style={{
+                  clipPath: `inset(0 ${
+                    100 - textProgress * 100
+                  }% 0 0)`,
+                }}
+              />
+            </span>
 
-                {index < words.length - 1 &&
-                  "\u00A0"}
-              </span>
-            );
-          })}
+          </span>
+
+          {/* SECOND SENTENCE */}
+          <span className="block w-[300px] sm:w-full">
+            {secondWords.map((word, index) => {
+              const globalIndex = firstWords.length + index;
+
+              const wordProgress = Math.min(
+                Math.max(
+                  textProgress * totalWords - globalIndex,
+                  0
+                ),
+                1
+              );
+
+              return (
+                <span
+                  key={index}
+                  className="inline-block transition-all duration-300"
+                  style={{
+                    opacity: wordProgress,
+                    filter: `blur(${(1 - wordProgress) * 10}px)`,
+                    transform: `translateY(${(1 - wordProgress) * 30}px)`,
+                  }}
+                >
+                  {word}
+                  {index < secondWords.length - 1 && "\u00A0"}
+                </span>
+              );
+            })}
+          </span>
 
         </h2>
 
-        {/* =====================================
-            UNDERLINE
-        ===================================== */}
-
-        <div
-          className="absolute left-0 top-[25%] w-full overflow-hidden"
-          style={{
-            clipPath: `inset(0 ${
-              100 - textProgress * 100
-            }% 0 0)`,
-          }}
-        >
-          <img
-            src="/images/underline-brush.avif"
-            alt=""
-            className="block w-full"
-          />
-        </div>
 
         {/* =====================================
             CHIPS
@@ -129,7 +189,7 @@ const SecondSection = ({progress1, progress2}) => {
         <div className="flex">
 
           <ul
-            className="mt-12 flex justify-center gap-4"
+            className="mt-12 flex justify-center gap-4 flex-col sm:flex-row"
             role="list"
           >
 
@@ -138,7 +198,7 @@ const SecondSection = ({progress1, progress2}) => {
             ===================================== */}
 
             <li
-              className="relative rounded-2xl bg-white px-4 py-4"
+              className="relative"
               style={{
                 opacity: chip1Progress,
                 filter: `blur(${
@@ -183,8 +243,8 @@ const SecondSection = ({progress1, progress2}) => {
 
               </span>
 
-              <span className="block px-2 py-1 text-sm font-medium text-orange-900">
-                Rising energy costs
+              <span className="block px-3 py-3 text-[16px] font-semibold text-orange-900 bg-white rounded-xl">
+                RISING ENERGY COSTS
               </span>
 
             </li>
@@ -194,7 +254,7 @@ const SecondSection = ({progress1, progress2}) => {
             ===================================== */}
 
             <li
-              className="relative flex items-center gap-2 rounded-2xl bg-white px-4 py-2"
+              className="relative flex items-center gap-2"
               style={{
                 opacity: chip2Progress,
                 filter: `blur(${
@@ -239,8 +299,8 @@ const SecondSection = ({progress1, progress2}) => {
 
               </span>
 
-              <span className="rounded-full px-2 py-1 text-sm font-medium text-yellow-900">
-                Increased power outages
+              <span className="block px-3 py-3 text-[16px] font-semibold text-orange-900 bg-white rounded-xl">
+                INCREASED POWER OUTAGES
               </span>
 
             </li>
@@ -248,7 +308,6 @@ const SecondSection = ({progress1, progress2}) => {
           </ul>
 
         </div>
-
       </div>
 
     </section>
