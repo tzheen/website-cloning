@@ -16,7 +16,7 @@ const SignUpStep = ({ progress }) => {
 
 
     return (
-        <ol className="relative flex flex-row">
+        <ol className="relative flex flex-col md:flex-row md:gap-0 gap-[60px]">
 
             {steps.map((step, index) => {
 
@@ -42,7 +42,7 @@ const SignUpStep = ({ progress }) => {
                             relative
                             flex
                             flex-row
-                            ml-20
+                            md:ml-20
                             first:ml-0
                             flex-1
                         "
@@ -105,7 +105,8 @@ const SignUpStep = ({ progress }) => {
                             <h3
                                 className={`
                                     mt-2.5
-                                    text-[28px]
+                                    md:text-[28px]
+                                    text-[22px]
                                     text-[#1E4D2B]
                                     font-semibold
                                     leading-tight
@@ -123,7 +124,7 @@ const SignUpStep = ({ progress }) => {
                             <p
                                 className={`
                                     mt-2.5
-                                    text-base
+                                    text-[16px]
                                     leading-relaxed
                                     text-[#54534F]
                                     transition-all

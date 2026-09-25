@@ -85,7 +85,7 @@ const SixthSection = ({ progress6, progress7, progress8, progress9 }) => {
       <div className="relative z-10 flex w-[90vw] max-w-[1250px] md:flex-row flex-col items-center gap-[3vw]">
 
         {/* IMAGE */}
-        <div className="relative aspect-[3/2] md:w-[70%] w-[370px] h-[370px] shrink-0 overflow-hidden rounded-[14px]">
+        <div className="relative aspect-[3/2] md:w-[70%] md:h-auto w-[370px] h-[370px] shrink-0 overflow-hidden rounded-[14px]">
 
           {/* DAY IMAGE */}
           <img

@@ -184,6 +184,7 @@ const ScrollSections = () => {
         ===================================== */}
 
         <SeventhSection
+          progress8={progress8}
           progress9={progress8to10}
           progress10={progress10}
           progress11={progress11}
