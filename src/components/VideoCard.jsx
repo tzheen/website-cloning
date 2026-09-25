@@ -273,6 +273,7 @@ const VideoCard = () => {
         z-[9999]
         w-[15.78vw]
         max-w-[350px]
+        min-w-[165px]
         aspect-[5/3]
         rounded-3xl
         overflow-hidden

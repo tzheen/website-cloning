@@ -34,7 +34,7 @@ const Smallcard = ({ progress, smallText, isSmall }) => {
 
   return (
     <div
-      className={`transition-transform duration-500 ease-in-out absolute inset-0 z-50 flex items-center pl-[66px] ${isSmall ? "translate-y-[200px]" : ""}`}
+      className={`transition-transform duration-500 ease-in-out absolute inset-0 z-50 flex items-center justify-center sm:justify-start sm:pl-[66px] -translate-y-50 sm:translate-y-0 ${isSmall ? "sm:translate-y-[200px]" : ""}`}
       style={{
         opacity: cardOpacity,
       }}
@@ -42,7 +42,7 @@ const Smallcard = ({ progress, smallText, isSmall }) => {
     <a
       onClick={smallText}
       className="
-        -translate-y-20
+        -translate-y-15
         box-border
         w-fit
         min-h-[52px]
@@ -54,7 +54,8 @@ const Smallcard = ({ progress, smallText, isSmall }) => {
         leading-none
         inline-flex
         -rotate-[1.5deg]
-        cursor-pointer  
+        cursor-pointer 
+        mb-3
       "
       style={{
         fontFamily: '"Dahlia Blues", cursive',
@@ -67,22 +68,25 @@ const Smallcard = ({ progress, smallText, isSmall }) => {
     >
       Meet
     </a>
-      <h1 className={`transition-transform duration-500 ease-in-out absolute z-50 text-white font-bold text-[88px] flex flex-col leading-none ${isSmall ? "-translate-x-20 scale-[0.6]" : "translate-y-5"}`}>
+      <span className={`transition-transform duration-500 ease-in-out absolute z-50 text-white font-bold sm:text-[88px] text-[48px] items-center flex flex-col leading-none ${isSmall ? "sm:-translate-x-20 sm:scale-[0.6] translate-y-5 sm:translate-y-0" : "translate-y-5"}`}>
           Base Core
          <p
           className="
+            sm:
             inline-block
             pt-1
             font-['Dahlia_Blues','cursive']
-            text-[38px]
+            sm:text-[38px]
+            text-[22px]
+            text
             leading-none
             text-white
             -rotate-2
           "
           style={{
             transform: isSmall
-              ? "translateY(-24px)"
-              : "translateY(12px)",
+              ? "sm:-translateY(-24px)"
+              : "sm:translateY(12px)",
             opacity: isSmall ? 1 : 0,
             transition: "transform 300ms ease-out, opacity 300ms ease-out",
             transitionDelay: "400ms",
@@ -90,7 +94,7 @@ const Smallcard = ({ progress, smallText, isSmall }) => {
         >
           Built for all season
         </p>
-      </h1>
+      </span>
       <a
         onClick={scrollDown}
         className={`absolute z-50 pointer-events-auto flex items-center justify-center
@@ -101,7 +105,7 @@ const Smallcard = ({ progress, smallText, isSmall }) => {
           px-4 py-3
           cursor-pointer
           transition-transform duration-500 ease-in-out
-          ${isSmall ? "translate-y-18" : "translate-y-24"}
+          ${isSmall ? "sm:translate-y-18 translate-y-24" : "translate-y-24"}
         `}
       >        
         <span className="shrink-0">Learn More</span>
