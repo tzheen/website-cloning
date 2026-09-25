@@ -1,20 +1,44 @@
 import { useEffect } from "react";
 import { useState } from "react";
 
-const SixthSection = ({ progress7, progress8, progress9 }) => {
+const SixthSection = ({ progress6, progress7, progress8, progress9 }) => {
   const [gridOn, setGridOn] = useState(true);
-
-  const translateY = progress9 <= 0 ? 100 - progress7 * 100 : -progress9 * 100;
-
-  const showContent = progress7 >= 0.9;
+  const [isMd, setIsMd] = useState(false);
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 768px)");
 
-    if(progress8 > 0.7){
-      setGridOn(false);
-    }else if(progress8 < 0.3){
-      setGridOn(true);
+    const handleResize = () => {
+      setIsMd(mediaQuery.matches);
+    };
+
+    handleResize();
+    mediaQuery.addEventListener("change", handleResize);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleResize);
+    };
+  }, []);
+
+  const translateY = isMd ? (progress9 <= 0 ? 100 - progress7 * 100 : -progress9 * 100) : (progress8 <= 0 ? 100 - progress6 * 100 : -progress8 * 100);
+
+  const showContent = isMd ? (progress7 >= 0.9) : (progress6 >=0.9);
+
+  useEffect(() => {
+    if(isMd){
+      if(progress8 > 0.7){
+        setGridOn(false);
+      }else if(progress8 < 0.3){
+        setGridOn(true);
+      }
+    }else{
+      if(progress7 > 0.7){
+        setGridOn(false);
+      }else if(progress7 < 0.3){
+        setGridOn(true);
+      }
     }
+
 
   },[progress8]);
 

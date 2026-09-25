@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const ProgressLine = ({ progress }) => {
+const ProgressLine = ({ progress, isMd }) => {
     const [activeIndex, setActiveIndex] = useState(0);
 
     const features = [
@@ -53,13 +53,13 @@ const ProgressLine = ({ progress }) => {
     }, [progress]);
 
     return (
-        <ol className="relative mt-4.5 h-100">
+        <ol className="relative mt-4.5">
 
             {/* CONTINUOUS LINE */}
             <span
                 className="
                     absolute
-                    -left-5
+                    left-0
                     top-0
                     h-full
                     w-1.5
@@ -94,48 +94,72 @@ const ProgressLine = ({ progress }) => {
                         key={index}
                         className={`
                             relative
+                            pl-5
                             flex
-                            gap-5
                             transition-all
                             duration-500
-                            ${isActive ? "pb-10" : "pb-0"}
+                            ${isActive ? "pb-10" : "pb-8"}
                         `}
                     >
                         <div className="pt-1">
 
-                            <h3
+                            <div
                                 className={`
-                                    font-bold
-                                    leading-tight
                                     transition-all
                                     duration-500
+                                    ease-in-out
                                     ${
                                         isActive
-                                            ? "text-[20px] text-[#1E4D2B]"
-                                            : "text-[16px] text-[#54524F]"
+                                            ? "-translate-y-1"
+                                            : "translate-y-0"
                                     }
                                 `}
                             >
-                                {feature.title}
-                            </h3>
+                                <h3
+                                    className={`
+                                        font-bold
+                                        leading-tight
+                                        transition-all
+                                        duration-500
+                                        ${
+                                            isActive
+                                                ? isMd
+                                                    ? "text-[20px] text-[#1E4D2B]"
+                                                    : "text-[16px] text-[#1E4D2B]"
+                                                : "text-[16px] text-[#54524F]"
+                                        }
+                                    `}
+                                >
+                                    {feature.title}
+                                </h3>
 
-                            <p
-                                className={`
-                                    mt-2
-                                    text-base
-                                    leading-relaxed
-                                    text-black/70
-                                    transition-all
-                                    duration-500
-                                    ${
-                                        isActive
-                                            ? "translate-y-0 opacity-100"
-                                            : "translate-y-4 opacity-0"
-                                    }
-                                `}
-                            >
-                                {feature.body}
-                            </p>
+                                <div
+                                    className={`
+                                        grid
+                                        transition-all
+                                        duration-500
+                                        ease-in-out
+                                        ${
+                                            isActive
+                                                ? "grid-rows-[1fr] opacity-100"
+                                                : "grid-rows-[0fr] opacity-0"
+                                        }
+                                    `}
+                                >
+                                    <div className="overflow-hidden">
+                                        <p
+                                            className="
+                                                mt-2
+                                                text-[14px]
+                                                leading-relaxed
+                                                text-[#292826]
+                                            "
+                                        >
+                                            {feature.body}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
                     </li>
