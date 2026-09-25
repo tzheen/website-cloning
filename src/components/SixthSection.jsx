@@ -40,7 +40,7 @@ const SixthSection = ({ progress6, progress7, progress8, progress9 }) => {
     }
 
 
-  },[progress8]);
+  },[progress7, progress8]);
 
   return (
     <section
@@ -82,10 +82,10 @@ const SixthSection = ({ progress6, progress7, progress8, progress9 }) => {
           CONTENT
       ===================================== */}
 
-      <div className="relative z-10 flex w-[90vw] max-w-[1250px] flex-row items-center gap-[3vw]">
+      <div className="relative z-10 flex w-[90vw] max-w-[1250px] md:flex-row flex-col items-center gap-[3vw]">
 
         {/* IMAGE */}
-        <div className="relative aspect-[3/2] w-[70%] shrink-0 overflow-hidden rounded-[14px]">
+        <div className="relative aspect-[3/2] md:w-[70%] w-[370px] h-[370px] shrink-0 overflow-hidden rounded-[14px]">
 
           {/* DAY IMAGE */}
           <img
@@ -204,7 +204,7 @@ const SixthSection = ({ progress6, progress7, progress8, progress9 }) => {
         ===================================== */}
         <div
           className={`
-            relative w-[30%]
+            relative md:w-[30%]
 
             transition-all
             duration-[800ms]
@@ -224,10 +224,8 @@ const SixthSection = ({ progress6, progress7, progress8, progress9 }) => {
               ${gridOn ? "opacity-100" : "pointer-events-none opacity-0"}
             `}
           >
-            <h2 className="mb-[12px] text-[clamp(28px,2.5vw,38px)] font-bold leading-[1.08] text-[#1e4d2b]">
-              When the grid is up
-              <br />
-              and running:
+            <h2 className="mb-[12px] text-[clamp(32px,2.5vw,38px)] font-semibold leading-[1.08] text-[#1e4d2b]">
+              When the grid is up and running:
             </h2>
 
             <p className="text-[clamp(14px,1.1vw,16px)] leading-[1.35] text-[#5b5a57]">
@@ -247,10 +245,8 @@ const SixthSection = ({ progress6, progress7, progress8, progress9 }) => {
               ${gridOn ? "pointer-events-none opacity-0" : "opacity-100"}
             `}
           >
-            <h2 className="mb-[12px] text-[clamp(28px,2.5vw,38px)] font-bold leading-[1.08] text-white">
-              When the grid goes
-              <br />
-              down:
+            <h2 className="mb-[12px] text-[clamp(32px,2.5vw,38px)] font-bold leading-[1.08] text-white">
+              When the grid goes down:
             </h2>
 
             <p className="text-[clamp(14px,1.1vw,16px)] leading-[1.35] text-white">
