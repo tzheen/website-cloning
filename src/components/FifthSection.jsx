@@ -9,7 +9,7 @@ const FifthSection = ({ progress4, progress5, progress6, progress7 }) => {
   const [isMd, setIsMd] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(min-width: 768px)");
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
 
     const handleResize = () => {
       setIsMd(mediaQuery.matches);
@@ -24,13 +24,7 @@ const FifthSection = ({ progress4, progress5, progress6, progress7 }) => {
     };
   }, []);
 
-  const translateY = isMd
-    ? progress7 <= 0
-      ? 100 - progress5 * 100
-      : -progress7 * 100
-    : progress6 <= 0
-      ? 100 - progress4 * 100
-      : -progress6 * 100;
+  const translateY = isMd ? (progress7 <= 0 ? 100 - progress5 * 100 : -progress7 * 100) : (progress6 <= 0 ? 100 - progress4 * 100 : -progress6 * 100);
 
   const images = [
     "/images/better-battery-960.avif",

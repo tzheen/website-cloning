@@ -6,7 +6,7 @@ const SixthSection = ({ progress6, progress7, progress8, progress9 }) => {
   const [isMd, setIsMd] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(min-width: 768px)");
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
 
     const handleResize = () => {
       setIsMd(mediaQuery.matches);

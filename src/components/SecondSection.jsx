@@ -17,10 +17,6 @@ const SecondSection = ({progress1, progress2}) => {
 
   const totalWords = firstWords.length + secondWords.length;
 
-  // =====================================
-  // CHIPS
-  // =====================================
-
   const chip1Progress = Math.min(
     Math.max(
       (textProgress - 0.85) / 0.075,

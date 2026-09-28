@@ -107,7 +107,8 @@ const ScrollSections = () => {
         <main
           className="
             relative
-            h-[1100vh]
+            lg:h-[1100vh]
+            h-[1000vh]
             bg-[#f0eeeb]
             bg-[radial-gradient(#6b728020_1px,transparent_1px)]
             bg-[length:13px_13px]
